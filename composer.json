@@ -1,0 +1,12 @@
+{
+    "name": "tomasvotruba/lines",
+    "description": "Measuring the size of PHP project and its PHP features",
+    "license": "proprietary",
+    "bin": [
+        "bin/lines",
+        "bin/lines.php"
+    ],
+    "require": {
+        "php": ">=7.2"
+    }
+}
