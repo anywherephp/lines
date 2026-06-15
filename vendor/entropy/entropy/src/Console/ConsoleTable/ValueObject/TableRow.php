@@ -1,7 +1,7 @@
 <?php
 
 declare (strict_types=1);
-namespace Lines202606\TomasVotruba\Lines\ValueObject;
+namespace Lines202606\Entropy\Console\ConsoleTable\ValueObject;
 
 final class TableRow
 {

@@ -3,20 +3,20 @@
 declare (strict_types=1);
 namespace Lines202606\TomasVotruba\Lines\Console\OutputFormatter;
 
+use Lines202606\Entropy\Console\ConsoleTable\ConsoleTable;
+use Lines202606\Entropy\Console\ConsoleTable\ValueObject\TableRow;
+use Lines202606\Entropy\Console\ConsoleTable\ValueObject\TableView;
+use Lines202606\Entropy\Console\ConsoleTable\ViewRenderer;
 use Lines202606\Entropy\Console\Output\OutputPrinter;
-use Lines202606\TomasVotruba\Lines\Console\ConsoleTable;
-use Lines202606\TomasVotruba\Lines\Console\ViewRenderer;
 use Lines202606\TomasVotruba\Lines\Contract\OutputFormatterInterface;
 use Lines202606\TomasVotruba\Lines\FeatureCounter\ValueObject\FeatureCollector;
 use Lines202606\TomasVotruba\Lines\Helpers\NumberFormat;
 use Lines202606\TomasVotruba\Lines\Measurements;
-use Lines202606\TomasVotruba\Lines\ValueObject\TableRow;
-use Lines202606\TomasVotruba\Lines\ValueObject\TableView;
 final class TextOutputFormatter implements OutputFormatterInterface
 {
     /**
      * @readonly
-     * @var \TomasVotruba\Lines\Console\ViewRenderer
+     * @var \Entropy\Console\ConsoleTable\ViewRenderer
      */
     private $viewRenderer;
     /**
@@ -26,7 +26,7 @@ final class TextOutputFormatter implements OutputFormatterInterface
     private $outputPrinter;
     /**
      * @readonly
-     * @var \TomasVotruba\Lines\Console\ConsoleTable
+     * @var \Entropy\Console\ConsoleTable\ConsoleTable
      */
     private $consoleTable;
     public function __construct(ViewRenderer $viewRenderer, OutputPrinter $outputPrinter, ConsoleTable $consoleTable)

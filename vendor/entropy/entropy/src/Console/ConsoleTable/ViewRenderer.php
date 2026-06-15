@@ -1,11 +1,13 @@
 <?php
 
 declare (strict_types=1);
-namespace Lines202606\TomasVotruba\Lines\Console;
+namespace Lines202606\Entropy\Console\ConsoleTable;
 
+use Lines202606\Entropy\Attributes\RelatedTest;
+use Lines202606\Entropy\Console\ConsoleTable\ValueObject\TableRow;
+use Lines202606\Entropy\Console\ConsoleTable\ValueObject\TableView;
 use Lines202606\Entropy\Console\Output\OutputPrinter;
-use Lines202606\TomasVotruba\Lines\ValueObject\TableRow;
-use Lines202606\TomasVotruba\Lines\ValueObject\TableView;
+use Lines202606\Entropy\Tests\Console\ConsoleTable\ViewRendererTest;
 final class ViewRenderer
 {
     /**
@@ -15,7 +17,7 @@ final class ViewRenderer
     private $outputPrinter;
     /**
      * @readonly
-     * @var \TomasVotruba\Lines\Console\ConsoleTable
+     * @var \Entropy\Console\ConsoleTable\ConsoleTable
      */
     private $consoleTable;
     /**
@@ -27,6 +29,9 @@ final class ViewRenderer
         $this->outputPrinter = $outputPrinter;
         $this->consoleTable = $consoleTable;
     }
+    /**
+     * @api to be used outside
+     */
     public function renderTableView(TableView $tableView) : void
     {
         $this->outputPrinter->newline();

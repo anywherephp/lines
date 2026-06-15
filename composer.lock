@@ -4,29 +4,28 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d704c1e65c2a01c9b3d7538d0881e97",
+    "content-hash": "e73ad73a9d1f2be6d864823bdb2e200c",
     "packages": [
         {
             "name": "entropy/entropy",
-            "version": "0.4.1",
+            "version": "0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TomasVotruba/entropy.git",
-                "reference": "0cf95b5361c843c402ce0ca217e65333039b19b5"
+                "reference": "f0d35f20c9b361a63d0804906d36439a103953fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TomasVotruba/entropy/zipball/0cf95b5361c843c402ce0ca217e65333039b19b5",
-                "reference": "0cf95b5361c843c402ce0ca217e65333039b19b5",
+                "url": "https://api.github.com/repos/TomasVotruba/entropy/zipball/f0d35f20c9b361a63d0804906d36439a103953fd",
+                "reference": "f0d35f20c9b361a63d0804906d36439a103953fd",
                 "shasum": ""
             },
             "require": {
                 "ext-tokenizer": "*",
-                "php": "^8.3",
+                "php": "^8.4",
                 "webmozart/assert": "^2.4"
             },
             "require-dev": {
-                "phpecs/phpecs": "^2.3",
                 "phpstan/extension-installer": "^1.4",
                 "phpstan/phpstan": "^2.1",
                 "phpunit/phpunit": "^12.5",
@@ -35,7 +34,6 @@
                 "rector/swiss-knife": "^2.4",
                 "shipmonk/composer-dependency-analyser": "^1.8",
                 "symplify/easy-coding-standard": "^13.1",
-                "symplify/phpstan-extensions": "^12.0",
                 "symplify/phpstan-rules": "^14.10",
                 "tomasvotruba/type-coverage": "^2.2",
                 "tomasvotruba/unused-public": "^2.2",
@@ -54,9 +52,9 @@
             "description": "Entropy framework",
             "support": {
                 "issues": "https://github.com/TomasVotruba/entropy/issues",
-                "source": "https://github.com/TomasVotruba/entropy/tree/0.4.1"
+                "source": "https://github.com/TomasVotruba/entropy/tree/0.4.2"
             },
-            "time": "2026-06-15T13:01:26+00:00"
+            "time": "2026-06-15T13:31:41+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -1252,16 +1250,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "12.5.29",
+            "version": "12.5.30",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9aa66a47db3ea70f1a468e66dd969f67e594945a"
+                "reference": "900400a5b616d6fb306f9549f6da33ba615d3fbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9aa66a47db3ea70f1a468e66dd969f67e594945a",
-                "reference": "9aa66a47db3ea70f1a468e66dd969f67e594945a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/900400a5b616d6fb306f9549f6da33ba615d3fbb",
+                "reference": "900400a5b616d6fb306f9549f6da33ba615d3fbb",
                 "shasum": ""
             },
             "require": {
@@ -1330,7 +1328,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.29"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/12.5.30"
             },
             "funding": [
                 {
@@ -1338,7 +1336,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2026-06-04T06:14:42+00:00"
+            "time": "2026-06-15T13:12:30+00:00"
         },
         {
             "name": "rector/jack",

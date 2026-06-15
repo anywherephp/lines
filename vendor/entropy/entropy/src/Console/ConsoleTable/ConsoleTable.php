@@ -1,12 +1,11 @@
 <?php
 
 declare (strict_types=1);
-namespace Lines202606\TomasVotruba\Lines\Console;
+namespace Lines202606\Entropy\Console\ConsoleTable;
 
+use Lines202606\Entropy\Attributes\RelatedTest;
 use Lines202606\Entropy\Console\Output\OutputPrinter;
-/**
- * @see \TomasVotruba\Lines\Tests\Console\ConsoleTableTest
- */
+use Lines202606\Entropy\Tests\Console\ConsoleTable\ConsoleTableTest;
 final class ConsoleTable
 {
     /**
@@ -15,6 +14,7 @@ final class ConsoleTable
      */
     private $outputPrinter;
     /**
+     * @api used in tests
      * Marks a separator line between table rows.
      * @var string
      */

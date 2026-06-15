@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0d704c1e65c2a01c9b3d7538d0881e97
+class ComposerStaticInite73ad73a9d1f2be6d864823bdb2e200c
 {
     public static $prefixLengthsPsr4 = array (
         'L' =>
@@ -50,6 +50,10 @@ class ComposerStaticInit0d704c1e65c2a01c9b3d7538d0881e97
         'Lines202606\\Entropy\\Attributes\\RelatedTest' => __DIR__ . '/..' . '/entropy/entropy/src/Attributes/RelatedTest.php',
         'Lines202606\\Entropy\\Console\\CommandRegistry' => __DIR__ . '/..' . '/entropy/entropy/src/Console/CommandRegistry.php',
         'Lines202606\\Entropy\\Console\\ConsoleApplication' => __DIR__ . '/..' . '/entropy/entropy/src/Console/ConsoleApplication.php',
+        'Lines202606\\Entropy\\Console\\ConsoleTable\\ConsoleTable' => __DIR__ . '/..' . '/entropy/entropy/src/Console/ConsoleTable/ConsoleTable.php',
+        'Lines202606\\Entropy\\Console\\ConsoleTable\\ValueObject\\TableRow' => __DIR__ . '/..' . '/entropy/entropy/src/Console/ConsoleTable/ValueObject/TableRow.php',
+        'Lines202606\\Entropy\\Console\\ConsoleTable\\ValueObject\\TableView' => __DIR__ . '/..' . '/entropy/entropy/src/Console/ConsoleTable/ValueObject/TableView.php',
+        'Lines202606\\Entropy\\Console\\ConsoleTable\\ViewRenderer' => __DIR__ . '/..' . '/entropy/entropy/src/Console/ConsoleTable/ViewRenderer.php',
         'Lines202606\\Entropy\\Console\\Contract\\CommandInterface' => __DIR__ . '/..' . '/entropy/entropy/src/Console/Contract/CommandInterface.php',
         'Lines202606\\Entropy\\Console\\Contract\\DefaultCommandInterface' => __DIR__ . '/..' . '/entropy/entropy/src/Console/Contract/DefaultCommandInterface.php',
         'Lines202606\\Entropy\\Console\\Contract\\HiddenCommandInterface' => __DIR__ . '/..' . '/entropy/entropy/src/Console/Contract/HiddenCommandInterface.php',
@@ -410,10 +414,8 @@ class ComposerStaticInit0d704c1e65c2a01c9b3d7538d0881e97
         'Lines202606\\TomasVotruba\\Lines\\Analyser' => __DIR__ . '/../..' . '/src/Analyser.php',
         'Lines202606\\TomasVotruba\\Lines\\Command\\FeaturesCommand' => __DIR__ . '/../..' . '/src/Command/FeaturesCommand.php',
         'Lines202606\\TomasVotruba\\Lines\\Command\\MeasureCommand' => __DIR__ . '/../..' . '/src/Command/MeasureCommand.php',
-        'Lines202606\\TomasVotruba\\Lines\\Console\\ConsoleTable' => __DIR__ . '/../..' . '/src/Console/ConsoleTable.php',
         'Lines202606\\TomasVotruba\\Lines\\Console\\OutputFormatter\\JsonOutputFormatter' => __DIR__ . '/../..' . '/src/Console/OutputFormatter/JsonOutputFormatter.php',
         'Lines202606\\TomasVotruba\\Lines\\Console\\OutputFormatter\\TextOutputFormatter' => __DIR__ . '/../..' . '/src/Console/OutputFormatter/TextOutputFormatter.php',
-        'Lines202606\\TomasVotruba\\Lines\\Console\\ViewRenderer' => __DIR__ . '/../..' . '/src/Console/ViewRenderer.php',
         'Lines202606\\TomasVotruba\\Lines\\Contract\\OutputFormatterInterface' => __DIR__ . '/../..' . '/src/Contract/OutputFormatterInterface.php',
         'Lines202606\\TomasVotruba\\Lines\\DependencyInjection\\ContainerFactory' => __DIR__ . '/../..' . '/src/DependencyInjection/ContainerFactory.php',
         'Lines202606\\TomasVotruba\\Lines\\Exception\\ShouldNotHappenException' => __DIR__ . '/../..' . '/src/Exception/ShouldNotHappenException.php',
@@ -427,8 +429,6 @@ class ComposerStaticInit0d704c1e65c2a01c9b3d7538d0881e97
         'Lines202606\\TomasVotruba\\Lines\\Helpers\\NumberFormat' => __DIR__ . '/../..' . '/src/Helpers/NumberFormat.php',
         'Lines202606\\TomasVotruba\\Lines\\Measurements' => __DIR__ . '/../..' . '/src/Measurements.php',
         'Lines202606\\TomasVotruba\\Lines\\NodeVisitor\\StructureNodeVisitor' => __DIR__ . '/../..' . '/src/NodeVisitor/StructureNodeVisitor.php',
-        'Lines202606\\TomasVotruba\\Lines\\ValueObject\\TableRow' => __DIR__ . '/../..' . '/src/ValueObject/TableRow.php',
-        'Lines202606\\TomasVotruba\\Lines\\ValueObject\\TableView' => __DIR__ . '/../..' . '/src/ValueObject/TableView.php',
         'Lines202606\\Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Lines202606\\Webmozart\\Assert\\HasAssert' => __DIR__ . '/..' . '/webmozart/assert/src/HasAssert.php',
         'Lines202606\\Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
@@ -439,9 +439,9 @@ class ComposerStaticInit0d704c1e65c2a01c9b3d7538d0881e97
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit0d704c1e65c2a01c9b3d7538d0881e97::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit0d704c1e65c2a01c9b3d7538d0881e97::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit0d704c1e65c2a01c9b3d7538d0881e97::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite73ad73a9d1f2be6d864823bdb2e200c::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite73ad73a9d1f2be6d864823bdb2e200c::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInite73ad73a9d1f2be6d864823bdb2e200c::$classMap;
 
         }, null, ClassLoader::class);
     }
