@@ -3,9 +3,6 @@
 declare (strict_types=1);
 namespace Lines202606\TomasVotruba\Lines\ValueObject;
 
-/**
- * @api used in templates
- */
 final class TableRow
 {
     /**

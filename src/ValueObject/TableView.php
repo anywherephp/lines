@@ -4,9 +4,6 @@ declare (strict_types=1);
 namespace Lines202606\TomasVotruba\Lines\ValueObject;
 
 use Lines202606\Webmozart\Assert\Assert;
-/**
- * @api used in templates
- */
 final class TableView
 {
     /**
@@ -58,9 +55,5 @@ final class TableView
     public function getRows() : array
     {
         return $this->tableRows;
-    }
-    public function getTemplateFilePath() : string
-    {
-        return __DIR__ . '/../../views/table.php';
     }
 }

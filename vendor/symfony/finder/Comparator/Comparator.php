@@ -25,10 +25,10 @@ class Comparator
     private $operator;
     public function __construct(string $target, string $operator = '==')
     {
-        if (!\in_array($operator, ['>', '<', '>=', '<=', '==', '!='])) {
+        $this->target = $target;
+        if (!\in_array($operator, ['>', '<', '>=', '<=', '==', '!='], \true)) {
             throw new \InvalidArgumentException(\sprintf('Invalid operator "%s".', $operator));
         }
-        $this->target = $target;
         $this->operator = $operator;
     }
     /**

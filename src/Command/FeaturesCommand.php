@@ -5,19 +5,19 @@ namespace Lines202606\TomasVotruba\Lines\Command;
 
 use Lines202606\Entropy\Console\Contract\CommandInterface;
 use Lines202606\Entropy\Console\Enum\ExitCode;
-use Lines202606\Symfony\Component\Console\Style\SymfonyStyle;
+use Lines202606\Entropy\Console\Output\OutputPrinter;
 use Lines202606\TomasVotruba\Lines\Console\OutputFormatter\JsonOutputFormatter;
+use Lines202606\TomasVotruba\Lines\Console\OutputFormatter\TextOutputFormatter;
 use Lines202606\TomasVotruba\Lines\FeatureCounter\Analyzer\FeatureCounterAnalyzer;
-use Lines202606\TomasVotruba\Lines\FeatureCounter\ResultPrinter;
 use Lines202606\TomasVotruba\Lines\Finder\ProjectFilesFinder;
 use Lines202606\Webmozart\Assert\Assert;
 final class FeaturesCommand implements CommandInterface
 {
     /**
      * @readonly
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
+     * @var \Entropy\Console\Output\OutputPrinter
      */
-    private $symfonyStyle;
+    private $outputPrinter;
     /**
      * @readonly
      * @var \TomasVotruba\Lines\Finder\ProjectFilesFinder
@@ -30,20 +30,20 @@ final class FeaturesCommand implements CommandInterface
     private $featureCounterAnalyzer;
     /**
      * @readonly
-     * @var \TomasVotruba\Lines\FeatureCounter\ResultPrinter
+     * @var \TomasVotruba\Lines\Console\OutputFormatter\TextOutputFormatter
      */
-    private $resultPrinter;
+    private $textOutputFormatter;
     /**
      * @readonly
      * @var \TomasVotruba\Lines\Console\OutputFormatter\JsonOutputFormatter
      */
     private $jsonOutputFormatter;
-    public function __construct(SymfonyStyle $symfonyStyle, ProjectFilesFinder $projectFilesFinder, FeatureCounterAnalyzer $featureCounterAnalyzer, ResultPrinter $resultPrinter, JsonOutputFormatter $jsonOutputFormatter)
+    public function __construct(OutputPrinter $outputPrinter, ProjectFilesFinder $projectFilesFinder, FeatureCounterAnalyzer $featureCounterAnalyzer, TextOutputFormatter $textOutputFormatter, JsonOutputFormatter $jsonOutputFormatter)
     {
-        $this->symfonyStyle = $symfonyStyle;
+        $this->outputPrinter = $outputPrinter;
         $this->projectFilesFinder = $projectFilesFinder;
         $this->featureCounterAnalyzer = $featureCounterAnalyzer;
-        $this->resultPrinter = $resultPrinter;
+        $this->textOutputFormatter = $textOutputFormatter;
         $this->jsonOutputFormatter = $jsonOutputFormatter;
     }
     public function getName() : string
@@ -69,12 +69,12 @@ final class FeaturesCommand implements CommandInterface
         $fileInfos = $this->projectFilesFinder->find($projectDirectory);
         // Analyze collected files
         $featureCollector = $this->featureCounterAnalyzer->analyze($fileInfos);
-        $this->symfonyStyle->newLine();
+        $this->outputPrinter->newline();
         // print results
         if ($json) {
             $this->jsonOutputFormatter->printFeatures($featureCollector);
         } else {
-            $this->resultPrinter->print($featureCollector);
+            $this->textOutputFormatter->printFeatures($featureCollector);
         }
         return ExitCode::SUCCESS;
     }

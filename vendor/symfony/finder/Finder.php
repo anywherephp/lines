@@ -35,7 +35,7 @@ use Lines202606\Symfony\Component\Finder\Iterator\SortableIterator;
  *
  * @author Fabien Potencier <fabien@symfony.com>
  *
- * @implements \IteratorAggregate<string, SplFileInfo>
+ * @implements \IteratorAggregate<non-empty-string, SplFileInfo>
  */
 class Finder implements \IteratorAggregate, \Countable
 {
@@ -78,6 +78,10 @@ class Finder implements \IteratorAggregate, \Countable
      * @var bool
      */
     private $followLinks = \false;
+    /**
+     * @var bool
+     */
+    private $unixPaths = \false;
     /**
      * @var bool
      */
@@ -420,10 +424,8 @@ class Finder implements \IteratorAggregate, \Countable
      * @see ignoreVCS()
      *
      * @param string|string[] $pattern VCS patterns to ignore
-     *
-     * @return void
      */
-    public static function addVCSPattern($pattern)
+    public static function addVCSPattern($pattern) : void
     {
         foreach ((array) $pattern as $p) {
             self::$vcsPatterns[] = $p;
@@ -589,9 +591,8 @@ class Finder implements \IteratorAggregate, \Countable
      *
      * @see CustomFilterIterator
      */
-    public function filter(\Closure $closure)
+    public function filter(\Closure $closure, bool $prune = \false)
     {
-        $prune = 1 < \func_num_args() ? \func_get_arg(1) : \false;
         $this->filters[] = $closure;
         if ($prune) {
             $this->pruneFilters[] = $closure;
@@ -606,6 +607,18 @@ class Finder implements \IteratorAggregate, \Countable
     public function followLinks()
     {
         $this->followLinks = \true;
+        return $this;
+    }
+    /**
+     * Forces forward slashes as the directory separator in returned paths.
+     *
+     * This is intended for Windows, where the native separator is "\".
+     *
+     * @return $this
+     */
+    public function useUnixPaths()
+    {
+        $this->unixPaths = \true;
         return $this;
     }
     /**
@@ -650,7 +663,7 @@ class Finder implements \IteratorAggregate, \Countable
      *
      * This method implements the IteratorAggregate interface.
      *
-     * @return \Iterator<string, SplFileInfo>
+     * @return \Iterator<non-empty-string, SplFileInfo>
      *
      * @throws \LogicException if the in() method has not been called
      */
@@ -755,6 +768,9 @@ class Finder implements \IteratorAggregate, \Countable
         $flags = \RecursiveDirectoryIterator::SKIP_DOTS;
         if ($this->followLinks) {
             $flags |= \RecursiveDirectoryIterator::FOLLOW_SYMLINKS;
+        }
+        if ($this->unixPaths) {
+            $flags |= \RecursiveDirectoryIterator::UNIX_PATHS;
         }
         $iterator = new Iterator\RecursiveDirectoryIterator($dir, $flags, $this->ignoreUnreadableDirs);
         if ($exclude) {

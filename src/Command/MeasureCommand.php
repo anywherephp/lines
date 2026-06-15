@@ -5,7 +5,8 @@ namespace Lines202606\TomasVotruba\Lines\Command;
 
 use Lines202606\Entropy\Console\Contract\CommandInterface;
 use Lines202606\Entropy\Console\Enum\ExitCode;
-use Lines202606\Symfony\Component\Console\Style\SymfonyStyle;
+use Lines202606\Entropy\Console\Output\OutputPrinter;
+use Lines202606\Entropy\Console\Output\ProgressBar;
 use Lines202606\TomasVotruba\Lines\Analyser;
 use Lines202606\TomasVotruba\Lines\Console\OutputFormatter\JsonOutputFormatter;
 use Lines202606\TomasVotruba\Lines\Console\OutputFormatter\TextOutputFormatter;
@@ -34,16 +35,22 @@ final class MeasureCommand implements CommandInterface
     private $textOutputFormatter;
     /**
      * @readonly
-     * @var \Symfony\Component\Console\Style\SymfonyStyle
+     * @var \Entropy\Console\Output\OutputPrinter
      */
-    private $symfonyStyle;
-    public function __construct(PhpFilesFinder $phpFilesFinder, Analyser $analyser, JsonOutputFormatter $jsonOutputFormatter, TextOutputFormatter $textOutputFormatter, SymfonyStyle $symfonyStyle)
+    private $outputPrinter;
+    /**
+     * @readonly
+     * @var \Entropy\Console\Output\ProgressBar
+     */
+    private $progressBar;
+    public function __construct(PhpFilesFinder $phpFilesFinder, Analyser $analyser, JsonOutputFormatter $jsonOutputFormatter, TextOutputFormatter $textOutputFormatter, OutputPrinter $outputPrinter, ProgressBar $progressBar)
     {
         $this->phpFilesFinder = $phpFilesFinder;
         $this->analyser = $analyser;
         $this->jsonOutputFormatter = $jsonOutputFormatter;
         $this->textOutputFormatter = $textOutputFormatter;
-        $this->symfonyStyle = $symfonyStyle;
+        $this->outputPrinter = $outputPrinter;
+        $this->progressBar = $progressBar;
     }
     public function getName() : string
     {
@@ -71,7 +78,7 @@ final class MeasureCommand implements CommandInterface
         }
         $filePaths = $this->phpFilesFinder->findInDirectories($paths, $excludes, $allowVendor);
         if ($filePaths === []) {
-            $this->symfonyStyle->error('No files found to scan');
+            $this->outputPrinter->error('No files found to scan');
             return ExitCode::ERROR;
         }
         $progressBarClosure = $this->createProgressBarClosure($json, $filePaths);
@@ -80,6 +87,7 @@ final class MeasureCommand implements CommandInterface
         if ($json) {
             $this->jsonOutputFormatter->printMeasurement($measurements, $short, $longest);
         } else {
+            $this->progressBar->finish();
             $this->textOutputFormatter->printMeasurement($measurements, $short, $longest);
         }
         return ExitCode::SUCCESS;
@@ -92,10 +100,9 @@ final class MeasureCommand implements CommandInterface
         if ($isJson) {
             return null;
         }
-        $progressBar = $this->symfonyStyle->createProgressBar(\count($filePaths));
-        $progressBar->start();
-        return static function () use($progressBar) : void {
-            $progressBar->advance();
+        $this->progressBar->start(\count($filePaths));
+        return function () : void {
+            $this->progressBar->advance();
         };
     }
 }

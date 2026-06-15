@@ -6,9 +6,6 @@ namespace Lines202606\TomasVotruba\Lines\DependencyInjection;
 use Lines202606\Entropy\Container\Container;
 use Lines202606\PhpParser\Parser;
 use Lines202606\PhpParser\ParserFactory;
-use Lines202606\Symfony\Component\Console\Input\ArrayInput;
-use Lines202606\Symfony\Component\Console\Output\ConsoleOutput;
-use Lines202606\Symfony\Component\Console\Style\SymfonyStyle;
 final class ContainerFactory
 {
     public function create() : Container
@@ -16,11 +13,6 @@ final class ContainerFactory
         $this->emulateTokensOfOlderPHP();
         $container = new Container();
         $container->autodiscover(__DIR__ . '/../Command');
-        // console
-        $consoleVerbosity = \defined('PHPUNIT_COMPOSER_INSTALL') ? ConsoleOutput::VERBOSITY_QUIET : ConsoleOutput::VERBOSITY_NORMAL;
-        $container->service(SymfonyStyle::class, static function () use($consoleVerbosity) : SymfonyStyle {
-            return new SymfonyStyle(new ArrayInput([]), new ConsoleOutput($consoleVerbosity));
-        });
         $container->service(Parser::class, static function () : Parser {
             $phpParserFactory = new ParserFactory();
             return $phpParserFactory->createForHostVersion();

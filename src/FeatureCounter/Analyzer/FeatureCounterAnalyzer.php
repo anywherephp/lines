@@ -3,13 +3,11 @@
 declare (strict_types=1);
 namespace Lines202606\TomasVotruba\Lines\FeatureCounter\Analyzer;
 
+use Lines202606\Entropy\Console\Output\ProgressBar;
 use Lines202606\OndraM\CiDetector\CiDetector;
 use Lines202606\PhpParser\NodeTraverser;
 use Lines202606\PhpParser\Parser;
 use Lines202606\PhpParser\ParserFactory;
-use Lines202606\Symfony\Component\Console\Helper\ProgressBar;
-use Lines202606\Symfony\Component\Console\Output\ConsoleOutput;
-use Lines202606\Symfony\Component\Console\Output\NullOutput;
 use Lines202606\Symfony\Component\Finder\SplFileInfo;
 use Lines202606\TomasVotruba\Lines\Exception\ShouldNotHappenException;
 use Lines202606\TomasVotruba\Lines\FeatureCounter\NodeVisitor\FeatureCollectorNodeVisitor;
@@ -26,12 +24,18 @@ final class FeatureCounterAnalyzer
     private $featureCollector;
     /**
      * @readonly
+     * @var \Entropy\Console\Output\ProgressBar
+     */
+    private $progressBar;
+    /**
+     * @readonly
      * @var \PhpParser\Parser
      */
     private $parser;
-    public function __construct(FeatureCollector $featureCollector)
+    public function __construct(FeatureCollector $featureCollector, ProgressBar $progressBar)
     {
         $this->featureCollector = $featureCollector;
+        $this->progressBar = $progressBar;
         $parserFactory = new ParserFactory();
         $this->parser = $parserFactory->createForNewestSupportedVersion();
     }
@@ -40,13 +44,11 @@ final class FeatureCounterAnalyzer
      */
     public function analyze(array $fileInfos) : FeatureCollector
     {
-        if ((new CiDetector())->isCiDetected()) {
-            $output = new NullOutput();
-        } else {
-            $output = new ConsoleOutput();
+        // progress bar is just noise in CI logs
+        $showProgressBar = !(new CiDetector())->isCiDetected();
+        if ($showProgressBar) {
+            $this->progressBar->start(\count($fileInfos));
         }
-        $progressBar = new ProgressBar($output);
-        $progressBar->start(\count($fileInfos));
         $featureCollectorNodeVisitor = new FeatureCollectorNodeVisitor($this->featureCollector);
         $nodeTraverser = new NodeTraverser($featureCollectorNodeVisitor);
         foreach ($fileInfos as $fileInfo) {
@@ -55,9 +57,13 @@ final class FeatureCounterAnalyzer
                 throw new ShouldNotHappenException(\sprintf('Parsing of file "%s" resulted in null statements.', $fileInfo->getRealPath()));
             }
             $nodeTraverser->traverse($stmts);
-            $progressBar->advance();
+            if ($showProgressBar) {
+                $this->progressBar->advance();
+            }
         }
-        $progressBar->finish();
+        if ($showProgressBar) {
+            $this->progressBar->finish();
+        }
         return $this->featureCollector;
     }
 }

@@ -32,9 +32,9 @@ class SplFileInfo extends \SplFileInfo
      */
     public function __construct(string $file, string $relativePath, string $relativePathname)
     {
-        parent::__construct($file);
         $this->relativePath = $relativePath;
         $this->relativePathname = $relativePathname;
+        parent::__construct($file);
     }
     /**
      * Returns the relative path.
@@ -66,7 +66,7 @@ class SplFileInfo extends \SplFileInfo
      */
     public function getContents() : string
     {
-        \set_error_handler(function ($type, $msg) use(&$error) {
+        \set_error_handler(static function ($type, $msg) use(&$error) {
             $error = $msg;
         });
         try {
